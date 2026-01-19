@@ -1,0 +1,39 @@
+name: Ma première CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18]
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Installer les dépendances
+        run: npm install
+
+      
+      - name: Lint syntaxe
+        run: npm run lint
+        
+      - name: Lancer les tests
+        run: npm test
+        # optionnel si tu n’as pas de tests
+        # continue-on-error: true
