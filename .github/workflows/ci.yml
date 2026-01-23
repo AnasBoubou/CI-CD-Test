@@ -36,7 +36,7 @@ jobs:
       - name: Lancer les tests
         run: npm test
         # optionnel si tu n’as pas de tests
-        # continue-on-error: true
+        # continue-on-error: truesqdvz
 
   deploy:
     name : Deploiment 
