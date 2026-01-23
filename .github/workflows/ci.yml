@@ -2,12 +2,8 @@ name: Ma première CI/CD
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+    tag:
+      - "dev-"
 jobs:
   build:
     runs-on: ubuntu-latest
