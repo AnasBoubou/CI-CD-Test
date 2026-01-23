@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: ttskch/render-deploy@v1.1.0
+      - uses: ttskch/render-deploy@1.0.0
         with:
           api-key: rnd_jf6omqccRqoPFgtAcM2MbY7RQ5R2
           service-id: srv-d5pibtpr0fns73f2amh0
