@@ -2,7 +2,7 @@ name: Ma première CI/CD
 
 on:
   push:
-    tag:
+    tags:
       - "dev-"
 jobs:
   build:
@@ -33,6 +33,26 @@ jobs:
         run: npm test
         # optionnel si tu n’as pas de tests
         # continue-on-error: truesqdvz
+      - name: SCA - Audit des dépendances
+        run: npm audit --audit-level=hig
+
+      - name: SAST - Scan du code source (Semgrep)
+        uses: semgrep/semgrep-action@v1
+        with:
+           config: p/javascrip
+
+
+      - name : C'est pas bon!
+        if: failure()
+        run: |
+         echo : "Echec"
+         curl -H "Content-Type: application/json" \
+              -d '{
+                   "username": "GitHub Actions",
+                   "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                   "content": "❌ **Échec du Workflow !**\n\n**Projet :** `${{ github.repository }}`\n**Branche :** `${{ github.ref_name }}`\n**Action :** [Voir le détail de l erreur](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\n**Message :** L exécution a rencontré une erreur critique."
+                  }' \
+         https://discord.com/api/webhooks/1472873032505753601/vkvWUhArxJRFAI-vtqEjhS43llrU_enUwjQgMh7JoKFDADRFRSjdwhCpEfHmXNrMIQ1N
 
   deploy:
     name : Deploiment 
@@ -43,3 +63,5 @@ jobs:
         with:
           api-key: rnd_jf6omqccRqoPFgtAcM2MbY7RQ5R2
           service-id: srv-d5pibtpr0fns73f2amh0
+
+  
