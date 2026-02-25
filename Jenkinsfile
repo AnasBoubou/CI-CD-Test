@@ -7,6 +7,10 @@ pipeline {
         RENDER_SERVICE_ID = 'srv-d5pibtpr0fns73f2amh0'
     }
 
+    tool{
+        nodejs 'node20'
+    }
+
     stages {
         stage('Install & Build') {
             steps {
