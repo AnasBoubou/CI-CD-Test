@@ -7,7 +7,7 @@ pipeline {
         RENDER_SERVICE_ID = 'srv-d5pibtpr0fns73f2amh0'
     }
 
-    tool{
+    tools{
         nodejs 'node20'
     }
 
